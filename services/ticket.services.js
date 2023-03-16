@@ -47,7 +47,6 @@ class TickService{
         })
     await ticket.save()
     return ticket
-    re
     }
     catch (error){
         return error
@@ -56,7 +55,21 @@ class TickService{
  }
 
     async cancel(ticket_id){
+        try{
 
+            const ticket = await ticketModel.findOne({_id: ticket_id}).exec()
+            
+            if(!ticket){
+                throw new Error("Tickect not found")
+            }
+
+            const delete_ticket = await ticketModel.deleteOne({_id: ticket_id}).exec()
+
+            return delete_ticket;
+        }
+        catch(error){
+            return error
+        }
     }
 
     async change_class(ticket_id){
