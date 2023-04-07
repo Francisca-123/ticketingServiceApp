@@ -1,3 +1,4 @@
+const { NotFoundException } = require('../@helpers/errorhandllers')
 const ticketModel = require('../models/ticket.model')
 const trainModel = require('../models/train.model')
 
@@ -60,7 +61,7 @@ class TickService{
             const ticket = await ticketModel.findOne({_id: ticket_id}).exec()
             
             if(!ticket){
-                throw new Error("Tickect not found")
+                throw new NotFoundException ("Tickect not found", 404)
             }
 
             const delete_ticket = await ticketModel.deleteOne({_id: ticket_id}).exec()
@@ -77,7 +78,7 @@ class TickService{
 
             const ticket = await ticketModel.findOne({_id: ticket_id}).exec()
             if(!ticket){
-                throw new error("Ticket not found")
+                throw new NotFoundException ("Ticket not found", 404)
             }
 
             const train = await trainModel.findOne({train_id: ticket.train_id})

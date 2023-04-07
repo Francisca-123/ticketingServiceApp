@@ -1,3 +1,4 @@
+const { NotFoundException } = require('../@helpers/errorhandllers');
 const trainModel = require('../models/train.model')
 
 class TrainService{
@@ -21,12 +22,12 @@ class TrainService{
                 ticket_classes,
                 routes
             })
-
+            train.routes.push
             await train.save()
             return train;
         }
-        catch(e){
-            return e;
+        catch(error){
+            return error;
         }
     }
 
@@ -82,9 +83,8 @@ class TrainService{
                 schedule = stopsTrails
                 break
             }
-    
+        return schedule 
         }
-    
     
         catch(error){
             return error

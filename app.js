@@ -26,7 +26,21 @@ app.get(`/${api_version}`, (req, res, next)=>{
 
 app.use(`/${api_version}/trains`, trainRouter);
 app.use(`/${api_version}/tickets`, ticketRouter);
+app.use((error, req, res, nexr) => {
+    const statusCode = error.statusCode ? error.statusCode : 500;
+    const message = error.message;
+    if (statusCode === 500){
+        message = "An error occured on our server, we have been notified"
+    }
+    res.status(statusCode).json({
+        status:"error",
+        message:message,
+        error_code: statusCode,
+        data:null
+    })
 
+    next(error)
+})
 
 const PORT = process.env.PORT || 3000
 

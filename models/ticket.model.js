@@ -32,7 +32,7 @@ const TicketSchema = new Schema({
         type: String,
         require:true
     },
-    passenger_emil:{
+    passenger_email:{
         type: String,
         require:true
     },
